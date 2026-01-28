@@ -6,7 +6,7 @@ import { useGameStore } from '../store/useGameStore';
 import { GAME_CONFIG } from '../game/constants';
 import { Direction } from '../game/types';
 
-export const useGameLoop = (canvasRef: React.RefObject<HTMLCanvasElement>) => {
+export const useGameLoop = (canvasRef: React.RefObject<HTMLCanvasElement>, size: number) => {
   const { status, setStatus, incrementScore, updateHighScore, resetGame, incrementGameTime } = useGameStore();
   
   const snakeRef = useRef<Snake>(new Snake());
@@ -17,13 +17,14 @@ export const useGameLoop = (canvasRef: React.RefObject<HTMLCanvasElement>) => {
   const gameSpeedRef = useRef<number>(GAME_CONFIG.baseSpeed);
   const timeIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Initialize game
+  // Initialize renderer and handle resize
   useEffect(() => {
     if (canvasRef.current) {
       const canvas = canvasRef.current;
       const ctx = canvas.getContext('2d');
       if (ctx) {
-        rendererRef.current = new Renderer(ctx, canvas.width, canvas.height);
+        // Always create a new renderer or update existing one when size changes
+        rendererRef.current = new Renderer(ctx, size, size);
         
         // Initial draw
         rendererRef.current.clear();
@@ -32,7 +33,7 @@ export const useGameLoop = (canvasRef: React.RefObject<HTMLCanvasElement>) => {
         rendererRef.current.drawFood(foodRef.current);
       }
     }
-  }, [canvasRef]);
+  }, [canvasRef, size]); // Re-run when size changes
 
   // Handle keyboard controls
   useEffect(() => {
