@@ -4,9 +4,9 @@ export const GRID_SIZE = 20; // 20x20 grid
 
 export const GAME_CONFIG: GameConfig = {
   gridSize: GRID_SIZE,
-  baseSpeed: 150,
-  speedIncrement: 2,
-  minSpeed: 50,
+  baseSpeed: 180, // Slower start for better control
+  speedIncrement: 4, // Faster acceleration
+  minSpeed: 60,
 };
 
 export const COLORS = {

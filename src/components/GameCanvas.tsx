@@ -51,7 +51,7 @@ export const GameCanvas: React.FC = () => {
   return (
     <div 
       ref={containerRef} 
-      className="relative flex items-center justify-center w-full max-w-md mx-auto aspect-square bg-zinc-900 rounded-xl overflow-hidden shadow-2xl border-4 border-zinc-800"
+      className="relative flex items-center justify-center w-full max-w-2xl mx-auto aspect-square bg-zinc-900 rounded-xl overflow-hidden shadow-2xl border-4 border-zinc-800"
     >
       <canvas
         ref={canvasRef}
