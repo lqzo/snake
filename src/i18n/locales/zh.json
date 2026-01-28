@@ -1,0 +1,27 @@
+{
+  "home": {
+    "title": "贪吃蛇",
+    "subtitle": "经典街机体验",
+    "highScore": "最高分",
+    "startGame": "开始游戏",
+    "howToPlay": "游戏说明",
+    "rules": {
+      "move": "滑动或使用方向键控制移动",
+      "eat": "吃掉食物 🍎 获得分数并成长",
+      "avoid": "撞墙或撞到自己都会结束",
+      "speed": "随着蛇身变长，速度会增加"
+    }
+  },
+  "game": {
+    "swipeHint": "滑动屏幕改变方向"
+  },
+  "gameOver": {
+    "title": "游戏结束!",
+    "subtitle": "下次好运！",
+    "finalScore": "最终得分",
+    "best": "最高分",
+    "time": "时间",
+    "playAgain": "再玩一次",
+    "backToHome": "返回主页"
+  }
+}

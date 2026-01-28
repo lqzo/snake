@@ -1,0 +1,27 @@
+{
+  "home": {
+    "title": "Snake Game",
+    "subtitle": "Classic Arcade Experience",
+    "highScore": "High Score",
+    "startGame": "Start Game",
+    "howToPlay": "How to Play",
+    "rules": {
+      "move": "Swipe or use arrow keys to move",
+      "eat": "Eat food 🍎 to grow and score points",
+      "avoid": "Avoid walls and your own tail",
+      "speed": "Game speed increases as you grow"
+    }
+  },
+  "game": {
+    "swipeHint": "Swipe to change direction"
+  },
+  "gameOver": {
+    "title": "Game Over!",
+    "subtitle": "Better luck next time",
+    "finalScore": "Final Score",
+    "best": "Best",
+    "time": "Time",
+    "playAgain": "Play Again",
+    "backToHome": "Back to Home"
+  }
+}
