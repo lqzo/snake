@@ -1,4 +1,7 @@
 {
+  "app": {
+    "title": "贪吃蛇"
+  },
   "home": {
     "title": "贪吃蛇",
     "subtitle": "经典街机体验",

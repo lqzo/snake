@@ -1,4 +1,7 @@
 {
+  "app": {
+    "title": "Snake Game"
+  },
   "home": {
     "title": "Snake Game",
     "subtitle": "Classic Arcade Experience",
