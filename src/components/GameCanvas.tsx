@@ -5,7 +5,8 @@ import { useGameStore } from '../store/useGameStore';
 import { useNavigate } from 'react-router-dom';
 import { GRID_SIZE } from '../game/constants';
 
-export const GameCanvas: React.FC = () => {const canvasRef = useRef<HTMLCanvasElement>(null);
+export const GameCanvas: React.FC = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState(320);
   // Pass size to useGameLoop to ensure renderer updates
