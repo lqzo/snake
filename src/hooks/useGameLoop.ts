@@ -119,6 +119,10 @@ export const useGameLoop = (canvasRef: React.RefObject<HTMLCanvasElement>, size:
       if (snake.checkCollision()) {
         setStatus('GAME_OVER');
         updateHighScore();
+        // Haptic feedback for game over (long vibration)
+        if (navigator.vibrate) {
+          navigator.vibrate(400);
+        }
         return;
       }
 
@@ -127,6 +131,11 @@ export const useGameLoop = (canvasRef: React.RefObject<HTMLCanvasElement>, size:
         snake.grow();
         incrementScore(10);
         food.spawn(snake);
+        
+        // Haptic feedback for eating (short vibration)
+        if (navigator.vibrate) {
+          navigator.vibrate(50);
+        }
         
         // Increase speed
         gameSpeedRef.current = Math.max(

@@ -49,8 +49,19 @@ export class Renderer {
       const y = segment.y * this.cellSize;
       
       // Draw rounded rectangle for snake segments
+      // Add a slight glow effect for the head
+      if (index === 0) {
+        this.ctx.shadowBlur = 15;
+        this.ctx.shadowColor = COLORS.snakeHead;
+      } else {
+        this.ctx.shadowBlur = 0;
+      }
+
       this.roundRect(x + 1, y + 1, this.cellSize - 2, this.cellSize - 2, 4);
       this.ctx.fill();
+      
+      // Reset shadow
+      this.ctx.shadowBlur = 0;
       
       // Draw eyes for head
       if (index === 0) {
@@ -93,11 +104,24 @@ export class Renderer {
         this.ctx.beginPath();
         this.ctx.arc(rightEyeX, rightEyeY, eyeSize, 0, Math.PI * 2);
         this.ctx.fill();
+        
+        // Pupils
+        this.ctx.fillStyle = '#000000';
+        const pupilSize = eyeSize * 0.5;
+        this.ctx.beginPath();
+        this.ctx.arc(leftEyeX, leftEyeY, pupilSize, 0, Math.PI * 2);
+        this.ctx.fill();
+        
+        this.ctx.beginPath();
+        this.ctx.arc(rightEyeX, rightEyeY, pupilSize, 0, Math.PI * 2);
+        this.ctx.fill();
       }
     });
   }
 
   drawFood(food: Food) {
+    this.ctx.shadowBlur = 15;
+    this.ctx.shadowColor = COLORS.food;
     this.ctx.fillStyle = COLORS.food;
     const x = food.position.x * this.cellSize + this.cellSize / 2;
     const y = food.position.y * this.cellSize + this.cellSize / 2;
@@ -106,6 +130,9 @@ export class Renderer {
     this.ctx.beginPath();
     this.ctx.arc(x, y, radius, 0, Math.PI * 2);
     this.ctx.fill();
+    
+    // Reset shadow
+    this.ctx.shadowBlur = 0;
   }
 
   private roundRect(x: number, y: number, w: number, h: number, r: number) {
