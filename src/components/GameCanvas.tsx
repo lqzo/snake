@@ -3,24 +3,35 @@ import { useGameLoop } from '../hooks/useGameLoop';
 import { useTouchControls } from '../hooks/useTouchControls';
 import { useGameStore } from '../store/useGameStore';
 import { useNavigate } from 'react-router-dom';
+import { GRID_SIZE } from '../game/constants';
 
-export const GameCanvas: React.FC = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+export const GameCanvas: React.FC = () => {const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const { startGame, changeDirection } = useGameLoop(canvasRef);
+  const [size, setSize] = useState(320);
+  // Pass size to useGameLoop to ensure renderer updates
+  const { startGame, changeDirection } = useGameLoop(canvasRef, size);
   const { status } = useGameStore();
   const navigate = useNavigate();
-  const [size, setSize] = useState(320);
 
   // Responsive canvas size
   useEffect(() => {
     const updateSize = () => {
-      if (containerRef.current) {
-        const width = containerRef.current.clientWidth;
-        // Keep it square, but max out at some reasonable size or window height
-        const maxSize = Math.min(width, window.innerHeight - 200); 
-        setSize(maxSize);
-      }
+      // Calculate max available space
+      // Width: Window width - padding (32px)
+      // Height: Window height - header (80px) - footer/padding (100px)
+      const maxWidth = Math.min(window.innerWidth - 32, 600); // Max width 600px
+      const maxHeight = window.innerHeight - 180; 
+      
+      // Use the smaller dimension to keep it square
+      let newSize = Math.min(maxWidth, maxHeight);
+      
+      // Snap to grid size
+      newSize = Math.floor(newSize / GRID_SIZE) * GRID_SIZE;
+      
+      // Ensure min size
+      newSize = Math.max(newSize, 200);
+      
+      setSize(newSize);
     };
 
     updateSize();
@@ -51,7 +62,8 @@ export const GameCanvas: React.FC = () => {
   return (
     <div 
       ref={containerRef} 
-      className="relative flex items-center justify-center w-full max-w-2xl mx-auto aspect-square bg-zinc-900 rounded-xl overflow-hidden shadow-2xl border-4 border-zinc-800"
+      className="relative flex items-center justify-center mx-auto bg-zinc-900 rounded-xl overflow-hidden shadow-2xl border-4 border-zinc-800"
+      style={{ width: size + 8, height: size + 8 }} // Container fits canvas exactly (+ border)
     >
       <canvas
         ref={canvasRef}
